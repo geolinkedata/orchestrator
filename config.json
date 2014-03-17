@@ -1,0 +1,40 @@
+{
+    "serverPort": 3000,
+    "db":{
+        "connString":"postgres://postgres:postgres@127.0.0.1:5432/oaks",
+        "tokenTable":"rest_api_nodetoken",
+        "emailAddressTable": "account_emailaddress",
+        "dataLoadedTable": "rest_api_userdataloaded"
+    },
+    "semanticDb":{
+        "connString":"postgres://postgres:postgres@127.0.0.1:5432/endpoint",
+        "lockTable": "locked"
+    },
+    "dirs":{
+        "uploadShape": "/tmp/shapes",
+        "uploadTripleStore": "/tmp/triple-stores"
+    },
+    "tgeo":{
+        "host": "127.0.0.1",
+        "port": 8983,
+        "path": "/TripleGeo-Service/TripleGeoRun?",
+        "defaultResultFile": "/opt/jetty/webapps/TripleGeo-Serviceresult/result"
+    },
+    "strabon":{
+        "path": "/home/pas/Strabon/scripts/strabon",
+        "storeCmd": "StoreOp"
+    },
+    "email":{
+        "transport":{
+            "service": "Gmail",
+            "auth":{
+                "user": "user@gmail.com",
+                "pass": "passwordPhrase"
+            }
+        },
+        "sender": "senderAddress@gmail.com",
+        "subject": "oaks notification"
+    },
+    "jps": "/usr/lib64/java/bin/jps",
+    "timeout": 5000
+}
