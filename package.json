@@ -9,5 +9,12 @@
     "router": "*",
     "nodemailer": ">=0.6.1",
     "pg": "*"
+  },
+  "devDependencies": {
+        "mocha": "*",
+        "chai": "*"
+  },
+  "scripts": {
+    "test": "make test"
   }
 }

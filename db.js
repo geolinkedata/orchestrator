@@ -47,8 +47,8 @@ auth.checkToken = function(token, callback){
             if (err){
                 return errQuery(err);
             }
-            if (res.rows.length > 0)
-                callback(null, res.rows[0]);
+            if (res.rows.length > 0){
+                callback(null, res.rows[0]);}
             else
                 callback(null,false);
         });
@@ -83,14 +83,14 @@ auth.deleteToken = function(t, callback){
 
 /**
  * Inserts task load data in db.
- * @method dataLoaded
+ * @method loadData
  * @param {} user
  * @param {} message
  * @param {} dataLoaded
  * @param {} callback
  * @return
  */
-user.dataLoaded = function(user, message, dataLoaded, callback){
+user.loadData = function(user, message, dataLoaded, callback){
     pg.connect(config.connString, function(err, client, done){
         if (err){
             return errFetching(err);
@@ -103,7 +103,7 @@ user.dataLoaded = function(user, message, dataLoaded, callback){
                 return errFetching(err);
             }
             else
-                callback(/*null, res.rows[0]*/);
+                callback(null);
         });
 
     });

@@ -57,7 +57,7 @@ var execute = function(job, callback){
                         db.auth.deleteToken(job.token, function(err, res){
                             var msg = 'msg';
                             var loaded = true;
-                            db.user.dataLoaded(job.user, msg,
+                            db.user.loadData(job.user, msg,
                                                loaded, function(err, res){
                                                    if (job.sendEmail){
                                                        sendEmail(job.user, msg, loaded, function(){
