@@ -17,6 +17,10 @@ var jobs = [],
  */
 var sendEmail = function(user, msg, loaded, callback){
     db.user.getEmailAddress(user, function(err, res){
+        var msg = emailConfig.textOk;
+        if (loaded === false){
+            msg = emailConfig.textFailed;
+        }
         if (res){
             var transport = nodemailer.createTransport('SMTP', emailConfig.transport);
             var message = {

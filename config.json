@@ -33,7 +33,9 @@
             }
         },
         "sender": "senderAddress@gmail.com",
-        "subject": "oaks notification"
+        "subject": "oaks notifica caricamento dei dati",
+        "textOk": "i dati sono stati correttamente caricati sul server.",
+        "textFailed": "E' incorso un errore durante il caricamento dei dati sul server."
     },
     "jps": "/usr/lib64/java/bin/jps",
     "timeout": 5000
