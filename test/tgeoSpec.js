@@ -39,12 +39,8 @@ describe('Tgeo', function(){
                             }
                             done();
                         });
-                        done();
                     }
                 });
-
-
-              //  done();
             });
         });
     });
