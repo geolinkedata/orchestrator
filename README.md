@@ -25,7 +25,15 @@ modify values in **config.json**
 
 
 ### run tests
-TODO::!!!
+tests require mocha and chai.
+```
+make test
+```
+or
+```
+npm test
+```
+
 
 
 ## Running server
