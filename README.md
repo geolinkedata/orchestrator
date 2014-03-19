@@ -38,5 +38,4 @@ npm test
 ## Running server
 ```
 node server.js
-
 ```
