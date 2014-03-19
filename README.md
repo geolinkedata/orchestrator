@@ -25,7 +25,6 @@ modify values in **config.json**
 
 
 ### run tests
-tests require mocha and chai.
 ```
 make test
 ```
@@ -38,7 +37,6 @@ npm test
 
 ## Running server
 ```
-cd oaks_node
 node server.js
 
 ```
