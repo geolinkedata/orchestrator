@@ -15,7 +15,7 @@ var sys = require('sys'),
 exports.storeInSemanticDb = function(file, callback){
     //TODO:: change -f format where file type is not n3!
     var cmd = config.path+' -MM 3 -db endpoint -u postgres -pass postgres store -f N3 '+file;
-
+    console.log(cmd);
     exec(cmd, function(err, stdout, stderr){
 
         console.log('stderr: ' + stderr);
@@ -23,10 +23,11 @@ exports.storeInSemanticDb = function(file, callback){
             console.log('exec error: ' + err);
         }
         if (stdout === 'STORED\n'){
-            console.log('store ok.');
-            callback();
+            callback(null, true);
         }
-
+        else{
+            callback(null, false);
+        }
     });
 };
 
