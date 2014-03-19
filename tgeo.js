@@ -18,9 +18,7 @@ exports.convertShape = function(params, callback){
         path: config.path+params,
         method: 'POST'
     };
-
-    var arrParams=qs.parse(params);
-
+    var arrParams = qs.parse(params);
     var req = http.request(tgeo, function(res){
 
         console.log('STATUS: ' + res.statusCode);
@@ -36,8 +34,7 @@ exports.convertShape = function(params, callback){
             //move resulting triple store file
             var resFile=config.defaultResultFile+arrParams.outputFile.substring(
                 arrParams.outputFile.lastIndexOf('.'));
-            console.log(resFile);
-            console.log(arrParams.outputFile);
+
 
             //move triple-store file created by triplegeo
             var is = fs.createReadStream(resFile);
@@ -48,7 +45,7 @@ exports.convertShape = function(params, callback){
                     if(err){
                         return;
                     }
-                    callback(arrParams.outputFile);
+                    callback(null, arrParams.outputFile);
                 });
             });
         });

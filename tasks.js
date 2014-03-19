@@ -53,7 +53,8 @@ var execute = function(job, callback){
         if (running === false){
             db.semantic.dropLockTable(function(err){
                 tgeo.convertShape(job.params, function(outputFile){
-                    strabon.storeInSemanticDb(outputFile, function(){
+                    callback();
+                   /* strabon.storeInSemanticDb(outputFile, function(){
                         db.auth.deleteToken(job.token, function(err, res){
                             var msg = 'msg';
                             var loaded = true;
@@ -72,7 +73,7 @@ var execute = function(job, callback){
                                                    }
                                                });
                         });
-                    });
+                    });*/
                 });
             });
         }
