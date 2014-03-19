@@ -59,7 +59,7 @@ describe('DB', function(){
             });
         });
         describe('deleteToken', function(){
-            it('should be delete a token from db', function(done){
+            it('should delete a token from db', function(done){
                 //fake token
                 var token='qwertyuiop1234567890';
                 db.auth.deleteToken(token, function(err, res){
@@ -73,7 +73,7 @@ describe('DB', function(){
 
     describe('user', function(){
         describe('loadData', function(){
-            it('should be loads data in db', function(done){
+            it('should load data in db', function(done){
                 //fake data
                 var userId=1;
                 var msg='fake';
@@ -87,7 +87,7 @@ describe('DB', function(){
                 });
             });
         });
-        describe('getEmailAddress', function(done){
+        describe('getEmailAddress', function(){
             it ('should retrieve an email address from db', function(done){
                 var userId=1;
                 db.user.getEmailAddress(userId, function(err, res){
@@ -95,6 +95,18 @@ describe('DB', function(){
                     expect(res).to.have.a.property('email');
                     done();
                 });
+            });
+        });
+    });
+
+    describe('semantic', function(){
+        describe('dropLockTable', function(){
+            it('should delete the lock table', function(done){
+                db.semantic.dropLockTable(function(err){
+                    expect(err).to.be.null;
+                    done();
+                });
+
             });
         });
     });

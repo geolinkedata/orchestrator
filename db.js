@@ -155,7 +155,7 @@ semantic.dropLockTable = function(callback){
                 return errFetching(err);
             }
             else
-                callback();
+                callback(null);
         });
     });
 };

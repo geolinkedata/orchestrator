@@ -51,7 +51,7 @@ var sendEmail = function(user, msg, loaded, callback){
 var execute = function(job, callback){
     strabon.checkRunning( function(err, running){
         if (running === false){
-            db.semantic.dropLockTable(function(){
+            db.semantic.dropLockTable(function(err){
                 tgeo.convertShape(job.params, function(outputFile){
                     strabon.storeInSemanticDb(outputFile, function(){
                         db.auth.deleteToken(job.token, function(err, res){
