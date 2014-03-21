@@ -52,9 +52,9 @@ var execute = function(job, callback){
     strabon.checkRunning( function(err, running){
         if (running === false){
             db.semantic.dropLockTable(function(err){
-                tgeo.convertShape(job.params, function(outputFile){
+                tgeo.convertShape(job.params, function(tripleStoreFile){
                     callback();
-                   /* strabon.storeInSemanticDb(outputFile, function(){
+                   /* strabon.storeInSemanticDb(tripleStoreFile, function(){
                         db.auth.deleteToken(job.token, function(err, res){
                             var msg = 'msg';
                             var loaded = true;
