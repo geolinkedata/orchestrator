@@ -93,7 +93,7 @@ var execute = function(job, callback){
  * @param {} user
  * @return
  */
-exports.handler = function(job, user){
+exports.handler = function(job){
     if (jobs.length === 0){ //jobs array is empty
         execute(job, function(){
            return;
