@@ -21,18 +21,22 @@ route.post('/loadShape', function(req, res){
         if (token !== false){
             db.auth.checkToken(token, function(err, result){
                 if (result !== false){
-                    var b='';
+                    var params = '';
                     req.on('data', function(data){
-                        b+=data;
+                        params+=data;
                     });
                     req.on('end', function(){
-                        var job = {
+                        /*var job = {
                             params: b,
                             token: token,
                             user: result.user_id,
                             sendEmail: true
                         };
                         tasks.handler(job);
+                         */
+                        tgeo.convertShape(params, function(tripleStoreFile){
+                            console.log('Created: '+tripleStoreFile);
+                        });
                     });
                     res.writeHead(200);
                     res.end('');
@@ -57,5 +61,20 @@ route.post('/loadTripleStore', function(req, res){
     });
 });
 
+
+route.post('/convertShape', function(req, res){
+    var b ='';
+    req.on('data', function(data){
+        b+=data;
+    });
+    req.on('end', function(){
+        var job = {
+            params: b
+        };
+        tasks.handler(job);
+    });
+    res.writeHead(200);
+    res.end('');
+});
 
 exports.route = route;
