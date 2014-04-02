@@ -1,12 +1,12 @@
 {
     "serverPort": 3000,
     "db":{
-        "connString":"postgres://postgres:postgres@127.0.0.1:5432/oaks",
+        "connString":"postgres://postgres:postgres@127.0.0.1:5432/oaks_geonode",
         "tokenTable":"rest_api_nodetoken",
         "emailAddressTable": "account_emailaddress",
-        "dataLoadedTable": "rest_api_userdataloaded"
+        "dataLoadedTable": "rest_api_userdataloadedevents"
     },
-    "semanticDb":{
+    "strabonSemanticDb":{
         "connString":"postgres://postgres:postgres@127.0.0.1:5432/endpoint",
         "lockTable": "locked"
     },
@@ -23,6 +23,15 @@
     "strabon":{
         "path": "/home/pas/Strabon/scripts/strabon",
         "storeCmd": "StoreOp"
+    },
+    "virtuoso":{
+        "host": "127.0.0.1",
+        "port": 8890,
+        "isql":{
+            "port": 1111,
+            "user": "dba",
+            "pwd": "dba"
+        }
     },
     "email":{
         "transport":{

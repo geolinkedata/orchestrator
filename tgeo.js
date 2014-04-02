@@ -12,6 +12,7 @@ var http = require('http'),
  * @return
  */
 exports.convertShape = function(params, callback){
+
     var tgeo = {
         host: config.host,
         port: config.port,
@@ -19,6 +20,11 @@ exports.convertShape = function(params, callback){
         method: 'POST'
     };
     var arrParams = qs.parse(params);
+    console.log(arrParams);
+
+    var stats = fs.statSync(arrParams.inputFile);
+    console.log(arrParams.inputFile+' :  '+stats.size);
+
     var req = http.request(tgeo, function(res){
 
         console.log('STATUS: ' + res.statusCode);
@@ -27,10 +33,12 @@ exports.convertShape = function(params, callback){
 
         //doesn't works without on data event!!!
         res.on('data', function(chunk){
+            console.log('ondata');
             console.log(chunk);
         });
 
         res.on('end', function(){
+            console.log('onend');
             //move resulting triple store file
             var resFile=config.defaultResultFile+arrParams.outputFile.substring(
                 arrParams.outputFile.lastIndexOf('.'));
@@ -50,6 +58,10 @@ exports.convertShape = function(params, callback){
             });
         });
 
+        res.on('error', function(){
+            console.log('EROOR OCCURR');
+        });
+
     });
 
     req.on('error', function(e) {
@@ -60,4 +72,8 @@ exports.convertShape = function(params, callback){
     req.write('data\n');
     req.write('data\n');
     req.end();
+
+
+
+
 };

@@ -1,6 +1,6 @@
 var pg = require('pg'),
     config = require('./config.json').db,
-    configSemanticDb = require('./config.json').semanticDb,
+    configSemanticDb = require('./config.json').strabonSemanticDb,
     auth = {},
     user = {},
     semantic = {};

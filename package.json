@@ -8,7 +8,8 @@
   "dependencies": {
     "router": "*",
     "nodemailer": ">=0.6.1",
-    "pg": "*"
+    "pg": "*",
+    "virtuoso-isql-wrapper": ">=0.0.2"
   },
   "devDependencies": {
         "mocha": "*",

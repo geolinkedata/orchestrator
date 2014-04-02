@@ -26,17 +26,17 @@ route.post('/loadShape', function(req, res){
                         params+=data;
                     });
                     req.on('end', function(){
-                        /*var job = {
-                            params: b,
+                        var job = {
+                            params: params,
                             token: token,
                             user: result.user_id,
                             sendEmail: true
                         };
                         tasks.handler(job);
-                         */
+                         /*
                         tgeo.convertShape(params, function(tripleStoreFile){
                             console.log('Created: '+tripleStoreFile);
-                        });
+                        });*/
                     });
                     res.writeHead(200);
                     res.end('');
