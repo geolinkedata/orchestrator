@@ -20,23 +20,28 @@ describe('Virtuoso', function(){
             var exampleFile = 'example.nt';
             var exampleGraph = 'http://prova.com#';
 
+            var tmpExampleFile = path+'/'+exampleFile;
             //copy example file to /tmp
             //move triple-store file created by triplegeo
             var is = fs.createReadStream(__dirname+'/'+exampleFile);
-            var os = fs.createWriteStream(path+'/'+exampleFile);
+            var os = fs.createWriteStream(tmpExampleFile);
             is.pipe(os);
             is.on('end', function(){
                 virtuoso.storeInSemanticDb(path, exampleFile, exampleGraph, function(err, res){
                     expect(err).to.be.null;
                     expect(res).to.be.true;
-                    //TODO:: delete example file from /tmp!
                     //delete example graph from db
                     virtuoso.clearGraph(exampleGraph, function(err, res){
                         expect(err).to.be.null;
                         expect(res).to.be.true;
-                        done();
+                        //delete tmp example file
+                        fs.unlink(tmpExampleFile, function(err){
+                            if (err)
+                                return;
+                            else
+                                done();
+                        });
                     });
-                    done();
                 });
             });
         });
