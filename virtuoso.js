@@ -2,6 +2,12 @@ var config = require('./config.json').virtuoso.isql,
     isql = require('virtuoso-isql-wrapper'),
     http = require('http');
 
+/**
+ * Checks if virtuoso db is running.
+ * @method checkRunning
+ * @param {} callback
+ * @return
+ */
 exports.checkRunning = function(callback){
 
     var virtuosoConnection = {
@@ -31,7 +37,15 @@ exports.checkRunning = function(callback){
     req.end();
 };
 
-
+/**
+ * Stores a triple store file data in virtuoso db.
+ * @method storeInSemanticDb
+ * @param {} file path.
+ * @param {} file name.
+ * @param {} graph name.
+ * @param {} callback
+ * @return
+ */
 exports.storeInSemanticDb = function(path, file, graph, callback){
     var cli = new isql.Client({
         port: config.port,
