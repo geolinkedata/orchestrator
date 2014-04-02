@@ -13,7 +13,7 @@ describe('Virtuoso', function(){
         });
     });
     describe('storeInSemanticDb', function(){
-        it('should store a triple-store format file in virtuoso semantic db',function(done){
+        it('should store and then delete a triple-store format file in virtuoso semantic db',function(done){
             this.timeout(5000);
             //example file
             var path = '/tmp';
@@ -29,12 +29,16 @@ describe('Virtuoso', function(){
                 virtuoso.storeInSemanticDb(path, exampleFile, exampleGraph, function(err, res){
                     expect(err).to.be.null;
                     expect(res).to.be.true;
-                    //TODO:: delete example data from db and example file from /tmp!
+                    //TODO:: delete example file from /tmp!
+                    //delete example graph from db
+                    virtuoso.clearGraph(exampleGraph, function(err, res){
+                        expect(err).to.be.null;
+                        expect(res).to.be.true;
+                        done();
+                    });
                     done();
                 });
             });
-
-
         });
     });
 });
