@@ -36,10 +36,8 @@ describe('Virtuoso', function(){
                         expect(res).to.be.true;
                         //delete tmp example file
                         fs.unlink(tmpExampleFile, function(err){
-                            if (err)
-                                return;
-                            else
-                                done();
+                           expect(err).to.be.null;
+                           done();
                         });
                     });
                 });
