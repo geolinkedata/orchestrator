@@ -7,7 +7,7 @@ var expect = require('chai').expect,
 describe('Tgeo', function(){
     describe('convertShape', function(){
         it('should convert a shape file in a triple store format file', function(done){
-
+            this.timeout(5000);
             var arrParams={attribute: "osm_id",
                            class: "type",
                            defaultLang: "en",
