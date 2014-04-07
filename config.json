@@ -25,9 +25,8 @@
         "storeCmd": "StoreOp"
     },
     "virtuoso":{
-        "host": "127.0.0.1",
-        "port": 8890,
         "isql":{
+            "host": "127.0.0.1",
             "port": 1111,
             "user": "dba",
             "pwd": "dba"

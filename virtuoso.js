@@ -18,7 +18,7 @@ exports.checkRunning = function(callback){
     var virtuosoConnection = {
         host: config.host,
         port: config.port,
-        path: '',
+        path: '/',
         method: 'GET'
     };
 
@@ -36,7 +36,7 @@ exports.checkRunning = function(callback){
         if (e.code === 'ECONNREFUSED')
             callback(false, false);
         else
-            callback(true, false);
+            callback(true, true);
     });
 
     req.end();

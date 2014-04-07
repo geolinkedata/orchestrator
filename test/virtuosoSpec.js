@@ -7,7 +7,7 @@ describe('Virtuoso', function(){
         it('should verify that Virtuoso Open Link is running', function(done){
             virtuoso.checkRunning(function(err, res){
                 expect(err).to.be.a('boolean');
-                expect(res).to.be.a('boolean');
+                expect(res).to.be.true;
                 done();
             });
         });
