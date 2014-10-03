@@ -3,7 +3,15 @@ oaks_node
 
 node.js server app that handles loading requests in semantic db.
 
-doc in progress..
+## Requirements
+It requires node.js v0.10.20 at least.
+
+```
+apt-add-repository ppa:chris-lea/node.js
+apt-get update
+apt-get install nodejs
+
+```
 
 ## Installation
 
