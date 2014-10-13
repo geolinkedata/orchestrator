@@ -8,7 +8,7 @@ var http = require('http'),
 var tgeo = {
     host: config.host,
     port: config.port,
-    path: config.path,
+    path: config.appUrl,
     method: 'GET'
 };
 
