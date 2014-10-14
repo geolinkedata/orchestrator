@@ -16,9 +16,9 @@
     },
     "tgeo":{
         "host": "127.0.0.1",
-        "port": 8983,
+        "port": 8080,
         "appUrl": "/TripleGeo-Service/TripleGeoRun?",
-        "defaultResultFile": "/opt/jetty/webapps/TripleGeo-Serviceresult/result"
+        "defaultResultFile": "/var/lib/tomcat7/webapps/TripleGeo-Service/result/result"
     },
     "strabon":{
         "path": "/home/pas/Strabon/scripts/strabon",

@@ -32,11 +32,7 @@ var req = http.request(tgeo, function(res){
 
 
 req.on('error', function(e) {
-    console.log('problem with request: ' + e.message + '. Are jetty and triplegeo running?');
+    console.log('problem with request: ' + e.message + '. Are tomcat and triplegeo running?');
 });
 
 req.end();
-
-/*
-
-*/
