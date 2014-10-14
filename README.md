@@ -47,6 +47,10 @@ with:
     "coffee-script": "= 1.1.2"
   },
 ```  
+and then reinstall module dependency:
+```
+npm install
+```
 
 ### configure server
 modify values in **config.json**
