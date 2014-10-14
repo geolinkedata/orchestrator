@@ -4,7 +4,8 @@ var config = require('./config.json').virtuoso.isql,
     cli = new isql.Client({
         port: config.port,
         user: config.user,
-        pwd: config.pwd
+        pwd: config.pwd,
+	command: 'isql-v'
     });
 
 /**
