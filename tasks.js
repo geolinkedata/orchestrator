@@ -1,6 +1,7 @@
 var jobs = [],
     tgeo = require('./tgeo'),
-    strabon = require('./strabon'),
+    //strabon = require('./strabon'),
+    virtuoso = require('./virtuoso'),
     db = require('./db'),
     nodemailer = require('nodemailer'),
     emailConfig = require('./config.json').email;
@@ -49,12 +50,12 @@ var sendEmail = function(user, msg, loaded, callback){
  * @return
  */
 var execute = function(job, callback){
-    strabon.checkRunning( function(err, running){
+    virtuoso.checkRunning( function(err, running){
         if (running === false){
             db.semantic.dropLockTable(function(err){
                 tgeo.convertShape(job.params, function(tripleStoreFile){
                     callback();
-                   /* strabon.storeInSemanticDb(tripleStoreFile, function(){
+                   virtuoso.storeInSemanticDb(tripleStoreFile, function(){
                         db.auth.deleteToken(job.token, function(err, res){
                             var msg = 'msg';
                             var loaded = true;
@@ -73,7 +74,7 @@ var execute = function(job, callback){
                                                    }
                                                });
                         });
-                    });*/
+                    });
                 });
             });
         }
@@ -82,6 +83,47 @@ var execute = function(job, callback){
         }
     });
 };
+
+
+
+
+
+
+/*
+var execute = function(job, callback){
+    strabon.checkRunning( function(err, running){
+        if (running === false){
+            db.semantic.dropLockTable(function(err){
+                tgeo.convertShape(job.params, function(tripleStoreFile){
+                    callback();
+                   strabon.storeInSemanticDb(tripleStoreFile, function(){
+                        db.auth.deleteToken(job.token, function(err, res){
+                            var msg = 'msg';
+                            var loaded = true;
+                            db.user.loadData(job.user, msg,
+                                               loaded, function(err, res){
+                                                   if (job.sendEmail){
+                                                       sendEmail(job.user, msg, loaded, function(){
+                                                           console.log('email');
+                                                           console.log('END');
+                                                           callback();
+                                                       });
+                                                   }
+                                                   else{
+                                                       console.log('END');
+                                                       callback();
+                                                   }
+                                               });
+                        });
+                    });
+                });
+            });
+        }
+        else{
+            callback();
+        }
+    });
+};*/
 
 
 
