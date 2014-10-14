@@ -27,6 +27,26 @@ cd oaks_node
 ```
 npm install
 ```
+note: virtuoso-isql-wrapper depends by coffee-script but recent versions are unsupported,
+so reinstall virtuoso-isql-wrapper dependency:
+
+```
+cd some_dir/node_modules/virtuoso-isql-wrapper
+rm -R node_modules/coffee-script
+```
+edit some_dir/node_modules/virtuoso-isql-wrapper/package.json and substitute
+```   
+  "dependencies": {
+    "coffee-script": ">= 1.1.2"
+  },
+```  
+with:
+
+```   
+  "dependencies": {
+    "coffee-script": "= 1.1.2"
+  },
+```  
 
 ### configure server
 modify values in **config.json**
