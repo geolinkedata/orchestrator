@@ -51,36 +51,17 @@ var sendEmail = function(user, msg, loaded, callback){
  */
 var execute = function(job, callback){
     virtuoso.checkRunning( function(err, running){
-        if (running === false){
-            db.semantic.dropLockTable(function(err){
-                tgeo.convertShape(job.params, function(tripleStoreFile){
-                    callback();
-                   virtuoso.storeInSemanticDb(tripleStoreFile, function(){
-                        db.auth.deleteToken(job.token, function(err, res){
-                            var msg = 'msg';
-                            var loaded = true;
-                            db.user.loadData(job.user, msg,
-                                               loaded, function(err, res){
-                                                   if (job.sendEmail){
-                                                       sendEmail(job.user, msg, loaded, function(){
-                                                           console.log('email');
-                                                           console.log('END');
-                                                           callback();
-                                                       });
-                                                   }
-                                                   else{
-                                                       console.log('END');
-                                                       callback();
-                                                   }
-                                               });
-                        });
-                    });
-                });
-            });
-        }
-        else{
-            callback();
-        }
+      if (running)
+      {
+	virtuoso.storeInSemanticDb(tripleStoreFile, function(){
+	  console.log(tripleStoreFile);
+	  callback();
+	});
+      }
+      else
+      {
+	callback();
+      }
     });
 };
 
