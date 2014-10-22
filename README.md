@@ -4,7 +4,49 @@ oaks_node
 node.js server app that handles loading requests in semantic db.
 
 ## Requirements
-It requires node.js v0.10.20 at least.
+It requires virtuoso db and node.js v0.10.20 at least.
+
+
+## Virtuoso
+
+You must build Virtuoso from sources because ubuntu package is an old version. Read `full instructions
+<http://virtuoso.openlinksw.com/dataspace/doc/dav/wiki/Main/VOSUbuntuNotes>`_ or:
+
+```
+
+    sudo apt-get update
+    sudo apt-get install git
+    sudo aptitude install dpkg-dev build-essential
+    sudo apt-get install autoconf automake libtool flex bison gperf gawk m4 make odbcinst libxml2-dev \
+     libssl-dev libreadline-dev
+    
+    mkdir /home/vagrant/C
+    cd /home/vagrant/C
+    git clone git://github.com/openlink/virtuoso-opensource.git
+    cd virtuoso-opensource
+    ./autogen.sh
+    ./configure --prefix=/usr/local/ --with-readline --program-transform-name="s/isql/isql-v/" \ 
+    --enable-ods-vad --enable-tutorial-vad --enable-sparqldemo-vad
+    
+    make -j5
+    sudo make install
+```
+
+Virtuoso is installed in **/usr/local/var/lib/virtuoso/**
+
+Start it with:
+
+```
+   
+    cd /usr/local/var/lib/virtuoso/db
+    virtuoso-t -fd &
+
+```
+
+
+## Node.js 
+
+Install Node.js with: 
 
 ```
 apt-add-repository ppa:chris-lea/node.js
