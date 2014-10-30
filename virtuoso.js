@@ -54,6 +54,7 @@ exports.checkRunning = function(callback){
  */
 exports.storeInSemanticDb = function(path, file, graph, callback){
     var fn = "ld_dir('"+path+"', '"+file+"', '"+graph+"');";
+    console.log(fn);
     cli.exec(fn, function(err, res) {
         cli.exec('rdf_loader_run();', function(err, res){
             callback(null, true);

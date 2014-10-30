@@ -2,13 +2,13 @@ var http = require('http'),
     routing = require('./routes'),
     tasks = require('./tasks'),
     port = require('./config.json').serverPort,
-    config = require('./config.json').tgeo,
+    configTgeo = require('./config.json').tgeo,
     timeout = require('./config.json').timeout;
 
 var tgeo = {
-    host: config.host,
-    port: config.port,
-    path: config.appUrl,
+    host: configTgeo.host,
+    port: configTgeo.port,
+    path: configTgeo.appUrl,
     method: 'GET'
 };
 
@@ -36,3 +36,6 @@ req.on('error', function(e) {
 });
 
 req.end();
+
+
+

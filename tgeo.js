@@ -16,17 +16,17 @@ exports.convertShape = function(params, callback){
     var tgeo = {
         host: config.host,
         port: config.port,
-        path: config.path+params,
+        path: config.appUrl+params,
         method: 'POST'
     };
     var arrParams = qs.parse(params);
-    console.log(arrParams);
+    //console.log(arrParams);
 
     var stats = fs.statSync(arrParams.inputFile);
-    console.log(arrParams.inputFile+' :  '+stats.size);
+    //console.log('inputFILE STATS'+arrParams.inputFile+' :  '+stats.size);
 
     var req = http.request(tgeo, function(res){
-
+ 
         console.log('STATUS: ' + res.statusCode);
         console.log('HEADERS: ' + JSON.stringify(res.headers));
         res.setEncoding('utf8');
@@ -44,17 +44,19 @@ exports.convertShape = function(params, callback){
                 arrParams.outputFile.lastIndexOf('.'));
 
 
+
             //move triple-store file created by triplegeo
             var is = fs.createReadStream(resFile);
             var os = fs.createWriteStream(arrParams.outputFile);
             is.pipe(os);
             is.on('end', function(){
-                fs.unlink(resFile, function(err){
+	      callback(null, arrParams.outputFile);
+                /*fs.unlink(resFile, function(err){
                     if(err){
                         return;
                     }
                     callback(null, arrParams.outputFile);
-                });
+                });*/
             });
         });
 
