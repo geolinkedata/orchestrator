@@ -10,7 +10,7 @@
 	"host": "oaks.binarioetico.org",
 	"port": 20581,
 	"restPath": "/geoserver/rest",
-	"auth": "admin:04ks04ks"
+	"auth": "admin:admin"
     },
     "strabonSemanticDb":{
         "connString":"postgres://postgres:postgres@127.0.0.1:5432/endpoint",
