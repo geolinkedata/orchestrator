@@ -6,10 +6,11 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "router": "*",
+    "express": "~4.0.0",
     "nodemailer": ">=0.6.1",
     "pg": "*",
-    "virtuoso-isql-wrapper": ">=0.0.2"
+    "virtuoso-isql-wrapper": ">=0.0.2",
+    "path": "*"
   },
   "devDependencies": {
         "mocha": "*",

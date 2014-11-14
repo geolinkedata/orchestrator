@@ -10,6 +10,7 @@
 	"host": "oaks.binarioetico.org",
 	"port": 20581,
 	"restPath": "/geoserver/rest",
+	"workspace": "geonode",
 	"auth": "admin:admin"
     },
     "strabonSemanticDb":{

@@ -94,6 +94,14 @@ and then reinstall module dependency:
 npm install
 ```
 
+install bootleaf:
+```
+cd some_dir/public/
+git clone https://github.com/pcasciano/bootleaf.git
+```
+
+
+
 ### configure server
 modify values in **config.json**
 
