@@ -50,7 +50,7 @@ var loadShpInGeonode = function(pathFile, callback){
     child.stdout.on('data', function (buffer) { resp += buffer.toString() });
     child.stdout.on('end', function() { callBack (resp) });
   };
-  
+
   run_cmd( 'geonode' , ['importlayers', pathFile], function(text) {  
     var lines = text.replace(/\r\n/g, '\n').split('\n');
 
@@ -78,14 +78,27 @@ var loadShpInGeonode = function(pathFile, callback){
   });
 };
 
+var getPath =  function(params){
+  var pos = params.indexOf('outputFile=');
+  var path = params.substr(pos+11);  
+  path = path.substring(0, path.indexOf('&'));
+  path = path.replace(/%2F/g, '/');
+  var pos1 = path.lastIndexOf('/');   
+  
+  return {
+    dirPath: path.substring(0, pos1),
+    name: path.substring( pos1+1)
+  }  
+};
+
 /**
  * Run the task
  * @method execute
  * @param {} job
  * @return
  */
-var execute = function(job, callback){
-  
+var execute = function(job, callback){  
+
   if (job.loadInGeonode)
   {
     var pos = job.params.indexOf('input_file=');
@@ -100,6 +113,14 @@ var execute = function(job, callback){
        callback(err, res);
     });
   }
+  else if (job.convertOnly)
+  {
+    tgeo.convertShape(job.params, function(tripleStoreFile){
+       var path=getPath(job.params);
+       console.log(path);
+       var graph= 'NULL';
+    });
+  }
   else
   {
     //console.log('LOAD'+ job.loadInGeonode);
@@ -107,16 +128,17 @@ var execute = function(job, callback){
       if (running)
       {
 	tgeo.convertShape(job.params, function(tripleStoreFile){
-	  var pos =  job.params.indexOf('outputFile=');
+	  var path=getPath(job.params);
+	  /*var pos =  job.params.indexOf('outputFile=');
  	  var path=job.params.substr(pos+11);
 	  path = path.substring(0, path.indexOf('&'));
 	  path = path.replace(/%2F/g, '/');
 	  var pos1 = path.lastIndexOf('/');
 	  var dirPath= path.substring(0, pos1);
-	  var name=path.substring( pos1+1);
+	  var name=path.substring( pos1+1);*/
 	  //TODO:: impostare il graph via API?
 	  var graph= 'NULL';
-	    virtuoso.storeInSemanticDb(dirPath, name, graph, function(){
+	    virtuoso.storeInSemanticDb(path.dirPath, path.name, graph, function(){
 	      console.log(tripleStoreFile);
 	      callback();
 	  });
@@ -177,8 +199,8 @@ var loadTripleStore = function(job, callback){
  */
 exports.handler = function(job, callback){
     if (jobs.length === 0){ //jobs array is empty
- 
-      if (job.shp){  //shape file
+
+      if (job.shp || job.convertOnly){  //shape file
 	  execute(job, callback);
         /*execute(job, function(){
            return;

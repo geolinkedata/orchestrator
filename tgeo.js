@@ -43,20 +43,23 @@ exports.convertShape = function(params, callback){
             var resFile=config.defaultResultFile+arrParams.outputFile.substring(
                 arrParams.outputFile.lastIndexOf('.'));
 
-
-
             //move triple-store file created by triplegeo
             var is = fs.createReadStream(resFile);
-            var os = fs.createWriteStream(arrParams.outputFile);
-            is.pipe(os);
+	    is.on('error', function(err){
+	      //res.end(err);
+	      console.log('ERROR, triple store resource not created!');
+	    });	    
+	    is.on('open', function(){
+	      var os = fs.createWriteStream(arrParams.outputFile);
+	      is.pipe(os);	      
+	    });
             is.on('end', function(){
-	      callback(null, arrParams.outputFile);
-                /*fs.unlink(resFile, function(err){
+                fs.unlink(resFile, function(err){
                     if(err){
                         return;
                     }
                     callback(null, arrParams.outputFile);
-                });*/
+                });
             });
         });
 

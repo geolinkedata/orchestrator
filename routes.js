@@ -158,14 +158,19 @@ exports.config = function(app){
 				loadInGeonode: true
 			    };
 			    tasks.handler(job, function(error, response){
-			      checkLayerStoredInGeoserverDb(response.fileName);
+			      
 			      sendResponse(error, response, res);
+			     // checkLayerStoredInGeoserverDb(response.fileName, 
+				//			    function(error, response){
+				//sendResponse(error, response, res);
+			     // });
+			      
 			    });
 			});
 
 		    }
 		    else{
-			console.log('token not found!');
+			sendResponse(false, {status: 401, detail: 'unauthorized'}, res);
 		    }
 		});
 	    }
@@ -201,7 +206,7 @@ exports.config = function(app){
 			res.end('file stored in semantic db.');
 		    }
 		    else{
-			console.log('token not found!');
+			sendResponse(false, {status: 401, detail: 'unauthorized'}, res);
 		    }
 		});
 	    }/*
@@ -235,7 +240,7 @@ exports.config = function(app){
 			});
 		    }
 		    else{
-		      console.log('token not found!');
+		      sendResponse(false, {status: 401, detail: 'unauthorized'}, res);
 		    }	
 		});
 	    }
@@ -248,16 +253,22 @@ exports.config = function(app){
 	req.on('data', function(data){
 	    b+=data;
 	});
+	
+	req.on('error', function(err){
+	  sendReponse(error, false, res);
+	});
+	
 	req.on('end', function(){
 	    var job = {
-		params: b
+		params: b,
+		convertOnly: true
 	    };
 	    tasks.handler(job, function(error, response){
 	      sendResponse(error, response, res);
 	    });
 	});
-	res.writeHead(200);
-	res.end('');
+	//res.writeHead(200);
+	//res.end('');
     });
     
     
