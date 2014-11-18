@@ -2,9 +2,9 @@
     "serverPort": 3000,
     "db":{
         "connString":"postgres://postgres:postgres@127.0.0.1:5432/geonode",
-        "tokenTable":"rest_api_nodetoken",
+        "tokenTable":"oaks_rest_api_nodetoken",
         "emailAddressTable": "account_emailaddress",
-        "dataLoadedTable": "rest_api_userdataloadedevents"
+        "dataLoadedTable": "oaks_rest_api_userdataloadedevents"
     },
     "geoserver":{
 	"host": "oaks.binarioetico.org",
