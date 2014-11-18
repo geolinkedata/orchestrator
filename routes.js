@@ -195,15 +195,15 @@ exports.config = function(app){
 				shp: true
 			    };
 			    tasks.handler(job, function(error, response){
-			      sendResponse(error, response, res);
+			      sendResponse(error, {status: 200, detail: 'file stored in semantic db.'}, res);
 			    });
 			    /*
 			    tgeo.convertShape(params, function(tripleStoreFile){
 				console.log('Created: '+tripleStoreFile);
 			    });*/
 			});
-			res.writeHead(200);
-			res.end('file stored in semantic db.');
+			//res.writeHead(200);
+			//res.end('file stored in semantic db.');
 		    }
 		    else{
 			sendResponse(false, {status: 401, detail: 'unauthorized'}, res);

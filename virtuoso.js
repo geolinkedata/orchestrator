@@ -35,9 +35,9 @@ exports.checkRunning = function(callback){
 
     req.on('error', function(e){
         if (e.code === 'ECONNREFUSED')
-            callback(false, false);
+            callback(false, {status: 500, detail: 'Virtuoso db is stopped'});
         else
-            callback(true, true);
+            callback(true, {status: 200, detail: 'Virtuoso db is running'});
     });
 
     req.end();
