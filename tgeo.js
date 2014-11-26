@@ -20,10 +20,7 @@ exports.convertShape = function(params, callback){
         method: 'POST'
     };
     var arrParams = qs.parse(params);
-    //console.log(arrParams);
-
     var stats = fs.statSync(arrParams.inputFile);
-    //console.log('inputFILE STATS'+arrParams.inputFile+' :  '+stats.size);
 
     var req = http.request(tgeo, function(res){
  
@@ -31,14 +28,12 @@ exports.convertShape = function(params, callback){
         console.log('HEADERS: ' + JSON.stringify(res.headers));
         res.setEncoding('utf8');
 
-        //doesn't works without on data event!!!
+        //doesn't work without on data event!!!
         res.on('data', function(chunk){
-            //console.log('ondata');
             console.log(chunk);
         });
 
         res.on('end', function(){
-            //console.log('onend');
             //move resulting triple store file
             var resFile=config.defaultResultFile+arrParams.outputFile.substring(
                 arrParams.outputFile.lastIndexOf('.'));
