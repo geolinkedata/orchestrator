@@ -17,15 +17,9 @@ var getToken = function(str, callback){
 };
 
 
-var sendResponse = function(error, data, res){
-    if (error){
-	res.writeHead(400);
-	res.end('Error on server!');
-    }
-    else{
-	res.writeHead(data.status);
-	res.end(data.detail);
-    }
+var sendResponse = function(data, res){
+    res.writeHead(data.status);
+    res.end(data.detail);
 };
 
 var checkLayerStoredInGeoserverDb = function(layer, callback){
@@ -159,7 +153,7 @@ exports.config = function(app){
 			    };
 			    tasks.handler(job, function(error, response){
 			      
-			      sendResponse(error, response, res);
+			      sendResponse(response, res);
 			     // checkLayerStoredInGeoserverDb(response.fileName, 
 				//			    function(error, response){
 				//sendResponse(error, response, res);
@@ -170,7 +164,7 @@ exports.config = function(app){
 
 		    }
 		    else{
-			sendResponse(false, {status: 401, detail: 'unauthorized'}, res);
+			sendResponse({status: 401, detail: 'unauthorized'}, res);
 		    }
 		});
 	    }
@@ -195,12 +189,15 @@ exports.config = function(app){
 				shp: true
 			    };
 			    tasks.handler(job, function(error, response){	
-			      sendResponse(error, {status: 200, detail: 'file stored in semantic db.'}, res);
+			      if (error)
+				sendResponse(error, res);
+			      else
+				sendResponse({status: 200, detail: 'file stored in semantic db.'}, res);
 			    });			    
 			});
 		    }
 		    else{
-			sendResponse(false, {status: 401, detail: 'unauthorized'}, res);
+			sendResponse({status: 401, detail: 'unauthorized'}, res);
 		    }
 		});
 	    }/*
@@ -229,12 +226,12 @@ exports.config = function(app){
 			      };
 			      console.log(job.params);
 			      tasks.handler(job, function(error, response){
-				sendResponse(error, response, res);
+				sendResponse(response, res);
 			    });
 			});
 		    }
 		    else{
-		      sendResponse(false, {status: 401, detail: 'unauthorized'}, res);
+		      sendResponse({status: 401, detail: 'unauthorized'}, res);
 		    }	
 		});
 	    }
@@ -258,7 +255,7 @@ exports.config = function(app){
 		convertOnly: true
 	    };
 	    tasks.handler(job, function(error, response){
-	      sendResponse(error, response, res);
+	      sendResponse(response, res);
 	    });
 	});
 	//res.writeHead(200);

@@ -128,6 +128,7 @@ var execute = function(job, callback){
       if (running)
       {
 	tgeo.convertShape(job.params, function(error, tripleStoreFile){
+	  console.log('ERR'+error.detail);
 	  if (error)
 	    callback(error, false);
 	  else {

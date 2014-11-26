@@ -33,12 +33,12 @@ exports.convertShape = function(params, callback){
 
         //doesn't works without on data event!!!
         res.on('data', function(chunk){
-            console.log('ondata');
+            //console.log('ondata');
             console.log(chunk);
         });
 
         res.on('end', function(){
-            console.log('onend');
+            //console.log('onend');
             //move resulting triple store file
             var resFile=config.defaultResultFile+arrParams.outputFile.substring(
                 arrParams.outputFile.lastIndexOf('.'));
@@ -46,7 +46,7 @@ exports.convertShape = function(params, callback){
             //move triple-store file created by triplegeo
             var is = fs.createReadStream(resFile);
 	    is.on('error', function(err){
-	      callback(true, false);
+	      callback({status: 500, detail: 'Error, triple store resource not created!'}, false);
 	      console.log('ERROR, triple store resource not created!');
 	    });	    
 	    is.on('open', function(){
@@ -56,7 +56,7 @@ exports.convertShape = function(params, callback){
             is.on('end', function(){
                 fs.unlink(resFile, function(err){
                     if(err){
-		      callback(true, false);
+		      callback({status: 500, detail: 'Internal server error.'}, false);
                     }
                     callback(false, arrParams.outputFile);
                 });
