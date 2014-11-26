@@ -56,22 +56,23 @@ exports.convertShape = function(params, callback){
             is.on('end', function(){
                 fs.unlink(resFile, function(err){
                     if(err){
-                        return;
+		      callback(true, false);
                     }
-                    callback(null, arrParams.outputFile);
+                    callback(false, arrParams.outputFile);
                 });
             });
         });
 
-        res.on('error', function(){
-	   callback(true, false);
+        res.on('error', function(){	   
             console.log('ERROR.');
+	    callback(true, false);
         });
 
     });
 
-    req.on('error', function(e) {
+    req.on('error', function(e) {      
         console.log('problem with request: ' + e.message);
+	callback(true, false);
     });
 
     // write data to request body
