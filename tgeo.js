@@ -56,6 +56,7 @@ exports.convertShape = function(params, callback){
             is.on('end', function(){
                 fs.unlink(resFile, function(err){
                     if(err){
+		      console.log('error! unlink file');
 		      callback({status: 500, detail: 'Internal server error.'}, false);
                     }
                     callback(false, arrParams.outputFile);
@@ -65,7 +66,7 @@ exports.convertShape = function(params, callback){
 
         res.on('error', function(){	   
             console.log('ERROR.');
-	    callback(true, false);
+	    callback({status: 500, detail: 'Error, Internal server error.'}, false);
         });
 
     });
