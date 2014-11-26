@@ -127,21 +127,19 @@ var execute = function(job, callback){
     virtuoso.checkRunning( function(err, running){
       if (running)
       {
-	tgeo.convertShape(job.params, function(tripleStoreFile){
-	  var path=getPath(job.params);
-	  /*var pos =  job.params.indexOf('outputFile=');
- 	  var path=job.params.substr(pos+11);
-	  path = path.substring(0, path.indexOf('&'));
-	  path = path.replace(/%2F/g, '/');
-	  var pos1 = path.lastIndexOf('/');
-	  var dirPath= path.substring(0, pos1);
-	  var name=path.substring( pos1+1);*/
-	  //TODO:: impostare il graph via API?
-	  var graph= 'NULL';
-	    virtuoso.storeInSemanticDb(path.dirPath, path.name, graph, function(){
-	      console.log(tripleStoreFile);
-	      callback();
-	  });
+	tgeo.convertShape(job.params, function(error, tripleStoreFile){
+	  if (error)
+	    callback(error, false);
+	  else {
+	    var path=getPath(job.params);
+
+	    //TODO:: impostare il graph via API?
+	    var graph= 'NULL';
+	      virtuoso.storeInSemanticDb(path.dirPath, path.name, graph, function(){
+		console.log(tripleStoreFile);
+		callback(false, false);
+	    });
+	  }   
 	});
       }
       else

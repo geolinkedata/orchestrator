@@ -46,7 +46,7 @@ exports.convertShape = function(params, callback){
             //move triple-store file created by triplegeo
             var is = fs.createReadStream(resFile);
 	    is.on('error', function(err){
-	      //res.end(err);
+	      callback(true, false);
 	      console.log('ERROR, triple store resource not created!');
 	    });	    
 	    is.on('open', function(){
@@ -64,7 +64,8 @@ exports.convertShape = function(params, callback){
         });
 
         res.on('error', function(){
-            console.log('EROOR OCCURR');
+	   callback(true, false);
+            console.log('ERROR.');
         });
 
     });
