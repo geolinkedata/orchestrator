@@ -1,6 +1,7 @@
 var http = require('http'),
     qs = require('querystring'),
     fs = require('fs'),
+    logger = require('./utils/logger'),
     config = require('./config.json').tgeo;
 
 
@@ -22,15 +23,30 @@ exports.convertShape = function(params, callback){
     var arrParams = qs.parse(params);
     var stats = fs.statSync(arrParams.inputFile);
 
+    var triplegeoLogs = function(statusCode, headers, body){
+	if (statusCode===200){
+	  logger.info('TRIPLEGEO STATUS: ' + statusCode);
+	  logger.info('Triple store resource created.');
+	}
+	else{
+	  logger.error('TRIPLEGEO STATUS: ' + statusCode);
+	  logger.error('TRIPLEGEO HEADERS:' + headers);
+	  logger.error('TRIPLEGEO BODY:' + body);
+	}
+    };
+    
     var req = http.request(tgeo, function(res){
  
-        console.log('STATUS: ' + res.statusCode);
-        console.log('HEADERS: ' + JSON.stringify(res.headers));
+	
+       // var headers='TRIPLEGEO STATUS: ' + res.statusCode;
+        var headers = JSON.stringify(res.headers);
+	var body = '';
+	
         res.setEncoding('utf8');
 
         //doesn't work without on data event!!!
         res.on('data', function(chunk){
-            console.log(chunk);
+            body+=chunk;
         });
 
         res.on('end', function(){
@@ -41,7 +57,8 @@ exports.convertShape = function(params, callback){
             //move triple-store file created by triplegeo
             var is = fs.createReadStream(resFile);
 	    is.on('error', function(err){
-	      console.log('ERROR, triple store resource not created!');
+	      triplegeoLogs(res.statusCode, headers, body);
+	      logger.error('ERROR, triple store resource not created by Triplegeo!');
 	      callback({status: 500, detail: 'Error, triple store resource not created!'}, false);	      
 	    });	    
 	    is.on('open', function(){
@@ -51,9 +68,10 @@ exports.convertShape = function(params, callback){
             is.on('end', function(){
                 fs.unlink(resFile, function(err){
                     if(err){
-		      console.log('error! unlink file');
+		      logger.error('error! Cannot unlink triple store file');
 		      callback({status: 500, detail: 'Internal server error.'}, false);
                     }
+                    triplegeoLogs(res.statusCode, headers, body);
                     callback(false, arrParams.outputFile);
                 });
             });

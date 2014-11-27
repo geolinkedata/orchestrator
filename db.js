@@ -3,7 +3,8 @@ var pg = require('pg'),
     configSemanticDb = require('./config.json').strabonSemanticDb,
     auth = {},
     user = {},
-    semantic = {};
+    semantic = {},
+    logger = require('./utils/logger');
 
 
 
@@ -14,7 +15,7 @@ var pg = require('pg'),
  * @return CallExpression
  */
 var errFetching = function(err){
-    return console.error('error fetching client from pool', err);
+    return logger.error('DB: error fetching client from pool', err);
 };
 
 /**
@@ -24,7 +25,7 @@ var errFetching = function(err){
  * @return CallExpression
  */
 var errQuery = function (err){
-    return console.error('error running query', err);
+    return logger.error('DB: error running query', err);
 };
 
 

@@ -5,14 +5,21 @@ var http = require('http'),
     configTgeo = require('./config.json').tgeo,
     timeout = require('./config.json').timeout,
     express = require('express'),
-    path = require('path');
+    path = require('path'),
+    logger = require('./utils/logger');
     
-    
+
+
+
 var app = express();  
 app.set('port', port);
 
 //app.use(app.router);
 app.use(express.static(path.join(__dirname, '/public')));
+
+
+
+app.use(require('morgan')("combined", { "stream": logger.stream }));
 
 route.config(app);
 

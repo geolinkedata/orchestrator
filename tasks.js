@@ -4,6 +4,7 @@ var jobs = [],
     virtuoso = require('./virtuoso'),
     db = require('./db'),
     nodemailer = require('nodemailer'),
+    logger = require('./utils/logger'),
     emailConfig = require('./config.json').email;
 
 
@@ -32,11 +33,11 @@ var sendEmail = function(user, msg, loaded, callback){
             };
             transport.sendMail(message, function(error){
                 if(error){
-                    console.log('Error occured during email sending.');
-                    console.log(error.message);
+                    logger.error('EMAIL: Error occured during email sending.');
+                    logger.error('EMAIL: '+error.message);
                     return;
                 }
-                console.log('Message sent successfully!');
+                logger.info('EMAIL: Message sent successfully!');
             });
         }
     });
@@ -126,7 +127,7 @@ var execute = function(job, callback){
   {
     tgeo.convertShape(job.params, function(tripleStoreFile){
        var path=getPath(job.params);
-       console.log(path);
+       //console.log(path);
        var graph= 'NULL';
     });
   }
@@ -144,7 +145,7 @@ var execute = function(job, callback){
 	    //TODO:: impostare il graph via API?
 	    var graph= 'NULL';
 	      virtuoso.storeInSemanticDb(path.dirPath, path.name, graph, function(){
-		console.log(tripleStoreFile);
+		//console.log(tripleStoreFile);
 		callback(false, false);
 	    });
 	  }   
@@ -179,7 +180,7 @@ var loadTripleStore = function(job, callback){
 	  //TODO:: impostare il graph via API?
 	  var graph= 'NULL';	  
 	      virtuoso.storeInSemanticDb(dirPath, name, graph, function(){
-		    console.log('triple-store file saved in semantic db.');
+		    logger.info('triple-store file saved in semantic db.');
 	            callback(false, false);
 	    });	
 	}

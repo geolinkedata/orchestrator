@@ -53,5 +53,14 @@
         "textFailed": "E' incorso un errore durante il caricamento dei dati sul server."
     },
     "jps": "/usr/lib64/java/bin/jps",
-    "timeout": 5000
+    "timeout": 5000,
+    "logs":{
+	"file": "/tmp/oaks-node-logs.log",
+	"level": "info",
+	"maxSize": 5242880,
+	"maxFiles": 5,
+	"jsonFormat": false,
+	"colorize": true
+    }
+    
 }

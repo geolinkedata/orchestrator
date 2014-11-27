@@ -2,7 +2,8 @@
     //route = router(),
 var db = require('./db'),
     http = require('http'),
-    geoserverConfig = require('./config.json').geoserver;
+    geoserverConfig = require('./config.json').geoserver,
+    logger = require('./utils/logger'),
     tasks = require('./tasks');
     
 var getToken = function(str, callback){
@@ -11,7 +12,7 @@ var getToken = function(str, callback){
         callback(null, token);
     }
     else{
-        console.log('authorization missing');
+        logger.info('AUTH: authorization missing');
         callback(null, false);
     }
 };
@@ -226,7 +227,7 @@ exports.config = function(app){
 				  user: result.user_id,
 				  sendEmail: true
 			      };
-			      console.log(job.params);
+			      //console.log(job.params);
 			      tasks.handler(job, function(error, response){					
 				if (error)
 				  sendResponse(error, res);
@@ -273,7 +274,7 @@ exports.config = function(app){
 		
 	  if (error)
 	  {
-	    console.log("Got error: " + e.message);
+	    logger.error('MAP: Error: ' + e.message);
 	    return;
 	  }
 	  	  
