@@ -29,7 +29,7 @@ describe('Tgeo', function(){
                           };
             var params=qs.stringify(arrParams);
             tgeo.convertShape(params, function(err, res){
-                expect(err).to.be.null;
+                expect(err).to.be.false;
                 fs.exists(res, function(exists){
                     if (exists){
                         //delete res file

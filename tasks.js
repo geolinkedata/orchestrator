@@ -132,7 +132,7 @@ var execute = function(job, callback){
   }
   else
   {
-    virtuoso.checkRunning( function(err, running){
+    virtuoso.checkRunning( function(err, running){      
       if (running)
       {
 	tgeo.convertShape(job.params, function(error, tripleStoreFile){	  

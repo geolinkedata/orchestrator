@@ -18,8 +18,8 @@
         "lockTable": "locked"
     },
     "dirs":{
-        "uploadShape": "/tmp/shapes",
-        "uploadTripleStore": "/tmp/triple-stores"
+        "uploadShape": "/var/www/oaks-data/shapes",
+        "uploadTripleStore": "/var/www/oaks-data/triple-stores"
     },
     "tgeo":{
         "host": "127.0.0.1",
