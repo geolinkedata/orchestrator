@@ -133,10 +133,10 @@ var getLayerInfo = function(layerUri, callback){
 };
 
 exports.config = function(app){
-    app.post('/loadShpInGeonode', function(req, res){
+    app.post('/loadShpInGeonode', function(req, res){      
 	getToken(req.headers.authorization, function(err, token){
 	    if (token !== false){
-		db.auth.checkToken(token, function(err, result){
+		db.auth.checkToken(token, function(err, result){		  
 		    if (result !== false){
 			var params = '';
 			req.on('data', function(data){
@@ -150,10 +150,12 @@ exports.config = function(app){
 				sendEmail: true,
 				shp: true,
 				loadInGeonode: true
-			    };
-			    tasks.handler(job, function(error, response){
-			      
-			      sendResponse(response, res);
+			    };			    
+			    tasks.handler(job, function(error, response){			      
+				if (error)
+				  sendResponse(error, res);
+				else
+				  sendResponse({status: 200, detail: 'file stored in geonode db.'}, res);
 			     // checkLayerStoredInGeoserverDb(response.fileName, 
 				//			    function(error, response){
 				//sendResponse(error, response, res);
@@ -225,8 +227,11 @@ exports.config = function(app){
 				  sendEmail: true
 			      };
 			      console.log(job.params);
-			      tasks.handler(job, function(error, response){
-				sendResponse(response, res);
+			      tasks.handler(job, function(error, response){					
+				if (error)
+				  sendResponse(error, res);
+				else
+				  sendResponse({status: 200, detail: 'triple-store file saved in semantic db.'}, res);
 			    });
 			});
 		    }

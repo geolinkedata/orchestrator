@@ -53,14 +53,15 @@ var loadShpInGeonode = function(pathFile, callback){
 
   run_cmd( 'geonode' , ['importlayers', pathFile], function(text) {  
     var lines = text.replace(/\r\n/g, '\n').split('\n');
-
     for (var i =0; i < lines.length; i++)
     {
       var pos=lines[i].indexOf(' Failed layers');
+     
       if (pos !== -1)
       {
 	var failedLayers=lines[i].substring(0, pos);
-	var res={};
+	
+	/*var res={};
 	if (failedLayers==='0')
 	{
 	  res.status=201;
@@ -72,7 +73,11 @@ var loadShpInGeonode = function(pathFile, callback){
 	  res.status=500;
 	  res.detail='error occured during storage in geonode database!';
 	}
-	callback(null, res);
+	callback(null, res);*/
+      }
+      else
+      {
+	callback({status: 500, detail: 'Error, importing in geonode db failed.'}, false);
       }
     }  
   });
@@ -105,12 +110,16 @@ var execute = function(job, callback){
     var filePath = job.params.substring(pos+11);
     filePath = filePath.replace(/%2F/g, '/');
     loadShpInGeonode(filePath, function(err, res){
-      var pos = filePath.lastIndexOf('/');
-      var fileName = filePath.substring(pos + 1);
-      var pos1 =  fileName.lastIndexOf('.');
-      fileName = fileName.substring(0, pos1);
-       res.fileName = fileName;
-       callback(err, res);
+        if (err)
+	  callback(err, false);
+	else {
+	  var pos = filePath.lastIndexOf('/');
+	  var fileName = filePath.substring(pos + 1);
+	  var pos1 =  fileName.lastIndexOf('.');
+	  fileName = fileName.substring(0, pos1);
+	  //res.fileName = fileName;	
+	  callback(err, res);
+	}
     });
   }
   else if (job.convertOnly)
@@ -123,12 +132,10 @@ var execute = function(job, callback){
   }
   else
   {
-    //console.log('LOAD'+ job.loadInGeonode);
     virtuoso.checkRunning( function(err, running){
       if (running)
       {
-	tgeo.convertShape(job.params, function(error, tripleStoreFile){
-	  console.log('ERR'+error.detail);
+	tgeo.convertShape(job.params, function(error, tripleStoreFile){	  
 	  if (error)
 	    callback(error, false);
 	  else {
@@ -171,15 +178,14 @@ var loadTripleStore = function(job, callback){
 	  
 	  //TODO:: impostare il graph via API?
 	  var graph= 'NULL';	  
-
 	      virtuoso.storeInSemanticDb(dirPath, name, graph, function(){
-		    console.log('triple store file stored in semantic db');
-	      callback();
+		    console.log('triple-store file saved in semantic db.');
+	            callback(false, false);
 	    });	
 	}
 	else
 	{
-	  callback();
+	  callback(err, false);
 	}
     });
 };
@@ -206,11 +212,9 @@ exports.handler = function(job, callback){
         });*/
       }
       else{ //triple store
-	loadTripleStore(job, function(){
-	   return;
-	});
+	loadTripleStore(job, callback);
       }
-      return;
+      //return;
     }
     else{ //adding job to queue array.
         jobs.push(job);
