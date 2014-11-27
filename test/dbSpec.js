@@ -98,7 +98,7 @@ describe('DB', function(){
             });
         });
     });
-
+    /* strabon related
     describe('semantic', function(){
         describe('dropLockTable', function(){
             it('should delete the lock table', function(done){
@@ -109,5 +109,5 @@ describe('DB', function(){
 
             });
         });
-    });
+    });*/
 });

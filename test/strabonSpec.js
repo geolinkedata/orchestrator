@@ -1,4 +1,4 @@
-var expect = require('chai').expect,
+/*var expect = require('chai').expect,
     strabon = require('../strabon');
 
 
@@ -11,7 +11,7 @@ describe('Strabon', function(){
                 done();
             });
         });
-    });/*
+    });
     describe('storeInSemanticDb', function(){
         it('should store a triple-store format file in semantic db',function(done){
             this.timeout(45000);
@@ -24,5 +24,6 @@ describe('Strabon', function(){
                 done();
             });
            });
-    });*/
+    });
 });
+*/
