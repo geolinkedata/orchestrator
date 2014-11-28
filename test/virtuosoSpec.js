@@ -19,7 +19,7 @@ describe('Virtuoso', function(){
         it('should store and then delete a triple-store format file in virtuoso semantic db',function(done){
             this.timeout(5000);
             //example file
-            var path = '/tmp';
+            var path = dataDir;
             var exampleFile = 'example.nt';
             var exampleGraph = 'http://prova.com#';
 
