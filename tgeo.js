@@ -61,7 +61,11 @@ exports.convertShape = function(params, callback){
 	      logger.error('ERROR, triple store resource not created by Triplegeo!');
 	      callback({status: 500, detail: 'Error, triple store resource not created!'}, false);	      
 	    });	    
-	    is.on('open', function(){
+	    is.on('open', function(err){
+	      if (err){
+		 logger.error('error! Cannot open triple store saved file');
+		 callback({status: 500, detail: 'Internal server error.'}, false);		
+	      }
 	      var os = fs.createWriteStream(arrParams.outputFile);
 	      is.pipe(os);	      
 	    });
