@@ -62,10 +62,10 @@ exports.convertShape = function(params, callback){
 	      callback({status: 500, detail: 'Error, triple store resource not created!'}, false);	      
 	    });	    
 	    is.on('open', function(err){
-	      if (err){
+	      /*if (err){
 		 logger.error('error! Cannot open triple store saved file');
 		 callback({status: 500, detail: 'Error, triple store file already saved on server.'}, false);		
-	      }
+	      }*/
 	      var os = fs.createWriteStream(arrParams.outputFile);
 	      is.pipe(os);	      
 	    });
@@ -82,14 +82,14 @@ exports.convertShape = function(params, callback){
         });
 
         res.on('error', function(){	   
-            console.log('ERROR.');
+            logger.error('ERROR, Internal server error.');
 	    callback({status: 500, detail: 'Error, Internal server error.'}, false);
         });
 
     });
 
     req.on('error', function(e) {      
-        console.log('problem with request: ' + e.message);
+        logger.error('ERROR, problem with request: ' + e.message);
 	callback({status: 400, detail: 'Error, Bad request.'}, false);
     });
 
