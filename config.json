@@ -2,24 +2,24 @@
     "serverPort": 3000,
     "db":{
         "connString":"postgres://geonode:geonode@127.0.0.1:5432/geonode",
-        "tokenTable":"oaks_rest_api_nodetoken",
+        "tokenTable":"geolinkedata_rest_api_nodetoken",
         "emailAddressTable": "account_emailaddress",
-        "dataLoadedTable": "oaks_rest_api_userdataloadedevents"
+        "dataLoadedTable": "geolinkedata_rest_api_userdataloadedevents"
     },
     "geoserver":{
-	"host": "oaks.binarioetico.org",
-	"port": 20581,
+	"host": "127.0.0.1",
+	"port": 8080,
 	"restPath": "/geoserver/rest",
 	"workspace": "geonode",
-	"auth": "admin:04ks04ks"
+	"auth": "admin:admin"
     },
     "strabonSemanticDb":{
         "connString":"postgres://geonode:geonode@127.0.0.1:5432/endpoint",
         "lockTable": "locked"
     },
     "dirs":{
-        "uploadShape": "/var/www/oaks-data/shapes",
-        "uploadTripleStore": "/var/www/oaks-data/triple-stores"
+        "uploadShape": "/var/www/geolinkedata-data/shapes",
+        "uploadTripleStore": "/var/www/geolinkedata-data/triple-stores"
     },
     "tgeo":{
         "host": "127.0.0.1",
@@ -28,7 +28,7 @@
         "defaultResultFile": "/var/lib/tomcat7/webapps/TripleGeo-Service/result/result"
     },
     "strabon":{
-        "path": "/home/pas/Strabon/scripts/strabon",
+        "path": "/home/geolinkedata/Strabon/scripts/strabon",
         "storeCmd": "StoreOp"
     },
     "virtuoso":{
@@ -48,14 +48,14 @@
             }
         },
         "sender": "senderAddress@gmail.com",
-        "subject": "oaks notifica caricamento dei dati",
+        "subject": "Geolinkedata notifica caricamento dei dati",
         "textOk": "i dati sono stati correttamente caricati sul server.",
-        "textFailed": "E' incorso un errore durante il caricamento dei dati sul server."
+        "textFailed": "E' occorso un errore durante il caricamento dei dati sul server."
     },
     "jps": "/usr/bin/jps",
     "timeout": 5000,
     "logs":{
-	"file": "/tmp/oaks-node-logs.log",
+	"file": "/tmp/geolinkedata-node-logs.log",
 	"level": "info",
 	"maxSize": 5242880,
 	"maxFiles": 5,
