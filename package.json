@@ -3,22 +3,23 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node server.js"
+    "test": "make test"
   },
   "dependencies": {
-    "express": "~4.0.0",
+    "body-parser": "^1.15.0",
+    "cluster-service": "^2.0.0-alpha4",
+    "express": "^4.0.0",
     "morgan": "^1.5.0",
     "nodemailer": ">=0.6.1",
+    "path": "*",
     "pg": "*",
     "virtuoso-isql-wrapper": ">=0.0.2",
-    "path": "*",
     "winston": "^0.8.3"
   },
   "devDependencies": {
-        "mocha": "*",
-        "chai": "*"
-  },
-  "scripts": {
-    "test": "make test"
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.3",
+    "mocha": "^2.4.5",
+    "sinon": "^1.17.3"
   }
 }
