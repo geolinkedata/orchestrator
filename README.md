@@ -1,13 +1,14 @@
-oaks_node
-=========
+Orchestrator
+============
 
-node.js server app that handles loading requests in semantic db.
+node.js server app that handles middleware operations to route requests to Geonode, and semantic db.
 
 ## Requirements
-It requires virtuoso db and node.js v0.10.20 at least.
+It requires Virtuoso or Strabon and GeoNode in the back-end.
 
+## Installation on Ubuntu
 
-## Virtuoso
+### Virtuoso
 
 You must build Virtuoso from sources because ubuntu package is an old version. Read `full instructions
 <http://virtuoso.openlinksw.com/dataspace/doc/dav/wiki/Main/VOSUbuntuNotes>`_ or:
@@ -43,8 +44,7 @@ Start it with:
 
 ```
 
-
-## Node.js 
+### Node.js 
 
 Install Node.js with: 
 
@@ -55,17 +55,17 @@ apt-get install nodejs
 
 ```
 
-## Installation
+## Orchestrator
 
-### Grab a copy of the repo
+### Clone the repo
 ```
 cd some_dir
-git clone https://github.com/pcasciano/oaks_node.git oaks_node
-cd oaks_node
+git clone https://github.com/geolinkedata/orchestrator.git orchestrator
+cd orchestrator
 
 ```
 
-### fetch all the oaks_node dependencies
+### Dependencies
 ```
 npm install
 ```
@@ -100,13 +100,11 @@ cd some_dir/public/
 git clone https://github.com/pcasciano/bootleaf.git
 ```
 
-
-
-### configure server
+### Configure the server
 modify values in **config.json**
 
 
-### run tests
+### Run tests
 ```
 make test
 ```
@@ -117,7 +115,7 @@ npm test
 
 
 
-## Running server
+## Running the server
 ```
 node server.js
 ```
