@@ -1,7 +1,7 @@
 var expect = require('chai').expect,
     assert = require('chai').assert,
     fs = require('fs'),
-    dataDir = require('../config.json').dirs.uploadShape,
+    config = require('../config.json').dirs,
     virtuoso = require('../virtuoso');
 
 describe('Virtuoso', function(){
@@ -19,7 +19,8 @@ describe('Virtuoso', function(){
         it('should store and then delete a triple-store format file in virtuoso semantic db',function(done){
             this.timeout(5000);
             //example file
-            var path = '/tmp';
+            //var path = '/tmp';
+            var path = config.uploadShape;
             var exampleFile = 'example.nt';
             var exampleGraph = 'http://prova.com#';
 
