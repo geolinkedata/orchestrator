@@ -24,7 +24,7 @@
     "tgeo":{
         "host": "127.0.0.1",
         "port": 8080,
-        "appUrl": "/TripleGeo-Service/TripleGeoRun?",
+        "appUrl": "/TripleGeo-Service/upload",
         "defaultResultFile": "/var/lib/tomcat7/webapps/TripleGeo-Service/result/result"
     },
     "strabon":{

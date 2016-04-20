@@ -1,12 +1,12 @@
 REPORTER = dot
 
 test:
-	@NODE_ENV=test /usr/bin/mocha \
+	@NODE_ENV=test mocha \
 	--reporter $(REPORTER) \
 	--ui tdd
 
 test-w:
-	@NODE_ENV=test /usr/bin/mocha \
+	@NODE_ENV=test mocha \
 	--reporter $(REPORTER) \
 	--growl \
 	--ui tdd \
