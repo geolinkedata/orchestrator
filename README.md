@@ -119,3 +119,29 @@ npm test
 ```
 node server.js
 ```
+
+### Use Docker
+
+Prepare the launch of docker:
+
+```
+eval $(docker-machine env default)
+```
+
+Build the application into a default container from a basic node.js image:
+
+```
+docker build -t francbartoli/orchestrator .
+```
+
+List your images:
+
+```
+docker images
+```
+
+Run the application into the container:
+
+```
+docker run -p 3000:3000 -d francbartoli/orchestrator
+``` 

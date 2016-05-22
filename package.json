@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "make test"
   },
   "dependencies": {
     "express": "~4.0.0",
@@ -17,8 +18,5 @@
   "devDependencies": {
         "mocha": "*",
         "chai": "*"
-  },
-  "scripts": {
-    "test": "make test"
   }
 }
