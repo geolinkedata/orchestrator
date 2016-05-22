@@ -1,0 +1,23 @@
+version: '2'
+datamiddleware:
+    image: busybox
+    volumes:
+        - /data/virtuoso
+services:
+    virtuoso:
+        # image: tenforce/virtuoso:virtuoso-v7.2.0-latest
+        - image: openlink/virtuoso_opensource
+    triplegeoservice:
+        image: francbartoli/TripleGeo-Service
+    middleware:
+        build: .
+        command: npm start
+        volumes:
+              - .:/usr/src/app
+        volumes_from:
+              - datamiddleware
+        ports:
+              - "3000:3000"
+        depends_on:
+              - virtuoso
+              - triplegeoservice

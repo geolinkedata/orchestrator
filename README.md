@@ -113,11 +113,13 @@ or
 npm test
 ```
 
-
-
 ## Running the server
 ```
 node server.js
+```
+or
+```
+npm start
 ```
 
 ### Use Docker
@@ -144,4 +146,15 @@ Run the application into the container:
 
 ```
 docker run -p 3000:3000 -d francbartoli/orchestrator
-``` 
+```
+
+#### Integrate with required application containers
+
+This application needs at least two external systems in order to work properly:
+
+- Virtuoso or Strabon as triple databases
+- TripleGeo service for converting spatial data into triples
+
+It is recommended to use **docker-compose** for integrating all together:
+
+
