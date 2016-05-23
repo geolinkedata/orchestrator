@@ -22,7 +22,7 @@
         "uploadTripleStore": "/var/www/geolinkedata-data/triple-stores"
     },
     "tgeo":{
-        "host": "127.0.0.1",
+        "host": "triplegeoservice",
         "port": 8080,
         "appUrl": "/TripleGeo-Service/upload",
         "defaultResultFile": "/var/lib/tomcat7/webapps/TripleGeo-Service/result/result"
@@ -33,7 +33,7 @@
     },
     "virtuoso":{
         "isql":{
-            "host": "127.0.0.1",
+            "host": "virtuoso",
             "port": 1111,
             "user": "dba",
             "pwd": "dba"
