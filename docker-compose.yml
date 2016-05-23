@@ -6,9 +6,9 @@ services:
             - /data/virtuoso
     virtuoso:
         # image: tenforce/virtuoso:virtuoso-v7.2.0-latest
-        image: openlink/virtuoso_opensource
+        image: openlink/virtuoso_opensource:vos
     triplegeoservice:
-        image: francbartoli/TripleGeo-Service
+        image: francbartoli/triplegeo-service
     middleware:
         build: .
         command: npm start
